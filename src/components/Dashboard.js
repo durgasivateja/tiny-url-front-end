@@ -8,14 +8,14 @@ import {
   Typography,
 } from "@material-ui/core";
 import { withStyles } from "@material-ui/styles";
+import clsx from "clsx";
 import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
+import { config } from "../config";
+import KeysChart from "./BarChart";
 import LineRechartComponent from "./LineRechart";
-import clsx from "clsx";
 import PieRechartComponent from "./PieRechart";
 import Topbar from "./Topbar";
-import { config } from "../config";
-import KeysChart from './BarChart';
 
 function Copyright() {
   return (
@@ -37,7 +37,7 @@ class Dashboard extends Component {
       token: undefined,
       pieData: undefined,
       lineData: undefined,
-      barData : undefined
+      barData: undefined,
     };
   }
 
@@ -64,7 +64,7 @@ class Dashboard extends Component {
       Credentials: "include",
     };
 
-    fetch(config.TINYURL + "barData", obj)
+    fetch(config.TINYURL + "metricsBar", obj)
       .then((response) => response.json())
       .then((data) => {
         this.setState({
@@ -109,7 +109,7 @@ class Dashboard extends Component {
               {/* Bar Chart */}
               <Grid item xs={12} md={12} lg={12}>
                 <Paper className={fixedHeightPaper}>
-                  <KeysChart data={this.state.barData}/>
+                  <KeysChart data={this.state.barData} />
                 </Paper>
               </Grid>
               {/* Line Chart */}

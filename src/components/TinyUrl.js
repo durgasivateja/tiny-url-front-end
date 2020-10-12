@@ -1,25 +1,18 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
-import { makeStyles } from "@material-ui/core/styles";
+import { Button, CssBaseline, TextField } from "@material-ui/core";
+import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
-import Grid from "@material-ui/core/Grid";
+import FileCopyIcon from "@material-ui/icons/FileCopy";
 import Alert from "@material-ui/lab/Alert";
-import {
-  Button,
-  Container,
-  CssBaseline,
-  IconButton,
-  TextField,
-} from "@material-ui/core";
-import Topbar from "./Topbar";
-import { withRouter } from "react-router-dom";
 import { withStyles } from "@material-ui/styles";
 import moment from "moment";
-import FileCopyIcon from "@material-ui/icons/FileCopy";
+import PropTypes from "prop-types";
+import React, { PureComponent } from "react";
+import { withRouter } from "react-router-dom";
 import { config } from "../config";
+import Topbar from "./Topbar";
 
-class TinyUrl extends Component {
+class TinyUrl extends PureComponent {
   constructor() {
     super();
     this.state = {
@@ -27,8 +20,8 @@ class TinyUrl extends Component {
       user_id: undefined,
       tinyUrl: undefined,
       showAlert: false,
+      longUrl : undefined
     };
-    //console.log(config.TINYURL)
   }
 
   componentDidMount() {
@@ -36,8 +29,9 @@ class TinyUrl extends Component {
     //console.log(!login)
     if (!login || !login.jwt) {
       this.nextPath("/signin");
+    } else {
+      this.setState({ user_id: login.user_id, jwt: login.jwt });
     }
-    this.setState({ user_id: login.user_id, jwt: login.jwt });
   }
 
   nextPath = (path) => {
@@ -81,6 +75,16 @@ class TinyUrl extends Component {
     // });
   }
 
+  validURL = (str) => {
+    var pattern = new RegExp('^(https?:\\/\\/)?'+ // protocol
+      '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|'+ // domain name
+      '((\\d{1,3}\\.){3}\\d{1,3}))'+ // OR ip (v4) address
+      '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*'+ // port and path
+      '(\\?[;&a-z\\d%_.~+=-]*)?'+ // query string
+      '(\\#[-a-z\\d_]*)?$','i'); // fragment locator
+    return !!pattern.test(str);
+  }
+
   copyClipBoard = () => {
     navigator.clipboard.writeText(this.state.tinyUrl);
     this.setState({ showAlert: true });
@@ -101,6 +105,22 @@ class TinyUrl extends Component {
     this.getTinyUrl(event.target.longurl.value, event.target.date.value);
   };
 
+  handleUrl = (event) => {
+    if(this.validURL(event.target.value))
+    {
+      this.setState({
+        longUrl : event.target.value
+      })
+    }
+    else
+    {
+      this.setState({
+        longUrl : undefined
+      })
+    }
+    
+  }
+
   preventDefault = (event) => event.preventDefault();
 
   render() {
@@ -115,7 +135,7 @@ class TinyUrl extends Component {
     };
 
     return (
-      <div>
+      <div style={{ height : "100%"}}>
         <CssBaseline />
         <Topbar currentPath={this.props.location.pathname} />
         <Paper
@@ -125,7 +145,7 @@ class TinyUrl extends Component {
           {/* Increase the priority of the hero background image */}
           {
             <img
-              style={{ display: "none", width: 40, height: 40 }}
+              style={{ display: "none", width: 40, height: "200%" }}
               src={post.image}
               alt={post.imageText}
             />
@@ -137,7 +157,7 @@ class TinyUrl extends Component {
           )}
           <div className={classes.overlay} />
           <Grid container spacing={1}>
-            <Grid item md={6}>
+            <Grid item md={6} sm={1}>
               <div className={classes.mainFeaturedPostContent}>
                 <Typography
                   component="h1"
@@ -175,6 +195,7 @@ class TinyUrl extends Component {
                   label="Long URL"
                   variant="filled"
                   name="longurl"
+                  onChange={this.handleUrl}
                   fullWidth
                 />
 
@@ -201,6 +222,7 @@ class TinyUrl extends Component {
 
                 <Button
                   type="submit"
+                  disabled={!this.state.longUrl}
                   style={{
                     color: "white",
                     backgroundColor: "black",
@@ -212,7 +234,7 @@ class TinyUrl extends Component {
                   Tiny URL
                 </Button>
               </form>
-              {this.state.tinyUrl !== undefined && (
+              {this.state.tinyUrl && (
                 <div>
                   <div
                     style={{
@@ -225,7 +247,7 @@ class TinyUrl extends Component {
                   </Typography> */}
                     <TextField
                       id="outlined-read-only-input"
-                      label="Tiny Url"
+                      //label="Tiny Url"
                       //defaultValue="Hello World"
                       InputProps={{
                         readOnly: true,
@@ -299,6 +321,7 @@ const useStyles = (theme) => ({
     backgroundSize: "cover",
     backgroundRepeat: "no-repeat",
     backgroundPosition: "center",
+    height:800
   },
   overlay: {
     position: "absolute",
@@ -311,7 +334,7 @@ const useStyles = (theme) => ({
   mainFeaturedPostContent: {
     position: "relative",
     padding: theme.spacing(3),
-    height: theme.spacing(50),
+    height: theme.spacing(30),
     [theme.breakpoints.up("md")]: {
       padding: theme.spacing(6),
       paddingRight: 0,

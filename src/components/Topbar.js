@@ -1,16 +1,16 @@
-import React, { Component } from "react";
-import withStyles from "@material-ui/styles/withStyles";
-import { Link, withRouter } from "react-router-dom";
-import Grid from "@material-ui/core/Grid";
-import Typography from "@material-ui/core/Typography";
-import Toolbar from "@material-ui/core/Toolbar";
-import AppBar from "@material-ui/core/AppBar";
-import Tabs from "@material-ui/core/Tabs";
-import Tab from "@material-ui/core/Tab";
 import { Box, Button, Link as MaterialLink } from "@material-ui/core";
+import AppBar from "@material-ui/core/AppBar";
+import Grid from "@material-ui/core/Grid";
+import Tab from "@material-ui/core/Tab";
+import Tabs from "@material-ui/core/Tabs";
+import Toolbar from "@material-ui/core/Toolbar";
+import Typography from "@material-ui/core/Typography";
+import withStyles from "@material-ui/styles/withStyles";
+import React, { PureComponent } from "react";
+import { Link, withRouter } from "react-router-dom";
 import Menu from "./Menu";
 
-class Topbar extends Component {
+class Topbar extends PureComponent {
   state = {
     value: 0,
     menuDrawer: false,
@@ -116,7 +116,7 @@ class Topbar extends Component {
               {!this.props.noTabs && (
                 <React.Fragment>
                   <div className={classes.productLogo}>
-                    <Typography>It works</Typography>
+                    <Typography>Team-A</Typography>
                   </div>
                   <Box flexDirection="row-reverse">
                     <div className={classes.tabContainer}>
@@ -124,7 +124,7 @@ class Topbar extends Component {
                         value={this.current() || this.state.value}
                         indicatorColor="primary"
                         textColor="primary"
-                        fontWeight="40"
+                        fontWeight="600"
                         onChange={this.handleChange}
                       >
                         {this.state.loggedIn === true &&
@@ -144,7 +144,7 @@ class Topbar extends Component {
                                       }
                                 }
                                 classes={{ root: classes.tabItem }}
-                                label={item.label}
+                                label={<span style={{ fontWeight: "800",fontSize : "100%"}}>{item.label}</span>}
                               />
                             )
                           )}
@@ -263,6 +263,7 @@ const styles = (theme) => ({
   tagline: {
     display: "inline-block",
     marginLeft: 10,
+    fontWeight : "bolder",
     [theme.breakpoints.up("md")]: {
       paddingTop: "0.8em",
     },

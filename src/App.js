@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
+import { blue, grey } from '@material-ui/core/colors';
+import { createMuiTheme } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
-import { createMuiTheme } from '@material-ui/core/styles'
+import React, { Component } from 'react';
 import './App.css';
-import Routes from './routes'
-import { blue, grey, indigo } from '@material-ui/core/colors'
+import Routes from './routes';
 
 const theme = createMuiTheme({
   palette: {

@@ -48,7 +48,7 @@ class PieRechartComponent extends React.Component {
   render() {
     return (
       <div>
-        <Title>Requests - Pie Chart</Title>
+        <Title>Requests - success and failure %</Title>
         <PieChart width={730} height={300}>
           <Pie
             data={this.props.data}

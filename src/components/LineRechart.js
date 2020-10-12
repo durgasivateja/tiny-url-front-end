@@ -1,12 +1,12 @@
 import React from "react";
 import {
-  LineChart,
-  Line,
-  YAxis,
-  XAxis,
   CartesianGrid,
-  Tooltip,
   Legend,
+  Line,
+  LineChart,
+  Tooltip,
+  XAxis,
+  YAxis,
 } from "recharts";
 import Title from "./Ttitle";
 
@@ -59,7 +59,7 @@ class LineRechartComponent extends React.Component {
           data={this.props.data}
           margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
         >
-          <CartesianGrid strokeDasharray="3 3" />
+          {/* <CartesianGrid strokeDasharray="3 3" /> */}
           <XAxis dataKey="date" tick={{ fill: "#ffffff" }} />
           <YAxis tick={{ fill: "#ffffff" }} />
           <Tooltip />

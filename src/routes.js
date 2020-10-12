@@ -11,7 +11,7 @@ export default props => (
     <HashRouter>
       <ScrollToTop>
         <Switch>
-          <Route exact path='/' component={ SignIn } />
+          <Route exact path='/' component={ TinyUrl } />
           <Route exact path='/dashboard' component={ Dashboard } />
           <Route exact path='/signin' component={ SignIn } />
           <Route exact path='/signup' component={ SignUp } />
