@@ -1,3 +1,3 @@
 export const config = {
-    TINYURL : "http://localhost:8080/"
+    TINYURL : "http://54.175.69.151:8080/"
 }
