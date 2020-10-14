@@ -70,7 +70,7 @@ class SignUp extends PureComponent {
       }),
     };
 
-    fetch(config.TINYURL + "blob/user", obj)
+    fetch(config.TINYURL + "user", obj)
       .then((response) => {
         if (response.status !== 200) {
           throw Error(response.statusText);

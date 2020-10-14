@@ -130,7 +130,7 @@ class SignUp extends PureComponent {
       }),
     };
 
-    fetch(config.TINYURL + 'profile/' + this.state.user, obj)
+    fetch(config.TINYURL + 'addProfile/' + this.state.user, obj)
       .then((response) => response.json())
       .then((data) => {
         this.nextPath("/tinyurl");

@@ -72,7 +72,7 @@ class SignIn extends Component {
       }),
     };
 
-    fetch(config.TINYURL + "blob/token", obj)
+    fetch(config.TINYURL + "token", obj)
       .then((response) => {
         //console.log(response)
         if (response.status !== 200) {
