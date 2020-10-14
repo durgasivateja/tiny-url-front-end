@@ -44,15 +44,15 @@ class Dashboard extends Component {
   }
 
   componentDidMount() {
-    // let login = JSON.parse(localStorage.getItem("login"));
-    // this.setState(
-    //   {
-    //     token: login.jwt,
-    //   },
-    //   () => {
-    //     this.getChartData();
-    //   }
-    // );
+    let login = JSON.parse(localStorage.getItem("login"));
+    this.setState(
+      {
+        token: login.jwt,
+      },
+      () => {
+        this.getChartData();
+      }
+    );
   }
 
   getChartData() {
