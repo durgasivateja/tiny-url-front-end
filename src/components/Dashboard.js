@@ -1,5 +1,6 @@
 import {
   Box,
+  Button,
   Container,
   CssBaseline,
   Grid,
@@ -9,6 +10,7 @@ import {
 } from "@material-ui/core";
 import { withStyles } from "@material-ui/styles";
 import clsx from "clsx";
+import download from "downloadjs";
 import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
 import { config } from "../config";
@@ -42,15 +44,15 @@ class Dashboard extends Component {
   }
 
   componentDidMount() {
-    let login = JSON.parse(localStorage.getItem("login"));
-    this.setState(
-      {
-        token: login.jwt,
-      },
-      () => {
-        this.getChartData();
-      }
-    );
+    // let login = JSON.parse(localStorage.getItem("login"));
+    // this.setState(
+    //   {
+    //     token: login.jwt,
+    //   },
+    //   () => {
+    //     this.getChartData();
+    //   }
+    // );
   }
 
   getChartData() {
@@ -96,6 +98,24 @@ class Dashboard extends Component {
       });
   }
 
+  handleDownload = () => {
+    var obj = {
+      method: "GET",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${this.state.token}`,
+      },
+      Credentials: "include",
+    };
+
+    fetch(config.TINYURL + "download", obj)
+      .then((response) => response.json())
+      .then((data) => {
+          download(data,"stats.xlsx")
+      });
+  };
+
   render() {
     const { classes } = this.props;
     const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
@@ -105,6 +125,18 @@ class Dashboard extends Component {
         <Topbar currentPath={this.props.location.pathname} />
         <main className={classes.content}>
           <Container maxWidth="lg" className={classes.container}>
+            <Box display="flex" flexDirection="row-reverse" p={1} m={1}>
+              <Button
+                style={{ backgroundColor: "white" }}
+                onClick={this.handleDownload}
+              >
+                <img
+                  src="https://cdn.iconscout.com/icon/free/png-256/microsoft-excel-3-599366.png"
+                  width="30"
+                ></img>
+                Download Excel
+              </Button>
+            </Box>
             <Grid container spacing={3}>
               {/* Bar Chart */}
               <Grid item xs={12} md={12} lg={12}>
