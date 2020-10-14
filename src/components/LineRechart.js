@@ -52,7 +52,7 @@ class LineRechartComponent extends React.Component {
   render() {
     return (
       <div>
-        <Title>Requests Success/Failure - Last 5 days - Line Chart</Title>
+        <Title>Requests Success/Failure  - Line Chart</Title>
         <LineChart
           width={750}
           height={250}
