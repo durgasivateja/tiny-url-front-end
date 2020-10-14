@@ -260,7 +260,7 @@ class TinyUrl extends PureComponent {
                         width: "52%",
                       }}
                       variant="outlined"
-                      value={this.state.tinyUrl}
+                      value={this.state.tinyUrl.substr(this.state.tinyUrl.indexOf("/redirect"),this.state.tinyUrl.length)}
                       fullWidth
                     />
 
