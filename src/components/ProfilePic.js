@@ -10,7 +10,7 @@ import Typography from "@material-ui/core/Typography";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import { withStyles } from "@material-ui/styles";
 import "profile-picture/build/ProfilePicture.css";
-import React, { PureComponent } from "react";
+import React, { Component, PureComponent } from "react";
 import { withRouter } from "react-router-dom";
 import { config } from "../config";
 import Topbar from "./Topbar";
@@ -28,7 +28,7 @@ function Copyright() {
   );
 }
 
-class SignUp extends PureComponent {
+class Profile extends Component {
   constructor() {
     super();
     this.profilePictureRef = React.createRef();
@@ -125,8 +125,8 @@ class SignUp extends PureComponent {
         Authorization: `Bearer ${this.state.token}`,
       },
       body: JSON.stringify({
-        user: event.target.username.value,
-        password: event.target.email.value,
+        username: this.state.username,
+        email: this.state.email,
       }),
     };
 
@@ -196,6 +196,9 @@ class SignUp extends PureComponent {
                     id="username"
                     label="User Name"
                     name="username"
+                    InputProps={{
+                      readOnly: true,
+                    }}
                     value={this.state.username}
                     onChange={this.handleUsername}
                   />
@@ -282,4 +285,4 @@ const useStyles = (theme) => ({
   },
 });
 
-export default withRouter(withStyles(useStyles)(SignUp));
+export default withRouter(withStyles(useStyles)(Profile));

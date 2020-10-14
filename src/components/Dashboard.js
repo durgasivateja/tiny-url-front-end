@@ -102,17 +102,17 @@ class Dashboard extends Component {
     var obj = {
       method: "GET",
       headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
+        "Content-Type": "application/vnd.ms-excel",
         Authorization: `Bearer ${this.state.token}`,
       },
       Credentials: "include",
     };
 
     fetch(config.TINYURL + "download", obj)
-      .then((response) => response.json())
+      .then((response) => response.blob())
       .then((data) => {
-          download(data,"stats.xlsx")
+        console.log(data);
+          download(data,"metrics.xlsx")
       });
   };
 
