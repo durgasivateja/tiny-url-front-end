@@ -55,7 +55,7 @@ class TinyUrl extends PureComponent {
       }),
     };
 
-    fetch(config.TINYURL + "createTinyUrl/", obj)
+    fetch(config.TINYURL + "tinyUrl/", obj)
       .then((response) => {
         console.log(response);
         return response.json();
@@ -260,7 +260,7 @@ class TinyUrl extends PureComponent {
                         width: "52%",
                       }}
                       variant="outlined"
-                      value={this.state.tinyUrl.substr(this.state.tinyUrl.indexOf("/redirect"),this.state.tinyUrl.length)}
+                      value={this.state.tinyUrl.substr(this.state.tinyUrl.indexOf("/tiny"),this.state.tinyUrl.length)}
                       fullWidth
                     />
 

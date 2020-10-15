@@ -69,7 +69,7 @@ class Profile extends Component {
       Credentials: "include",
     };
 
-    fetch(config.TINYURL + "getProfile/" + this.state.user, obj)
+    fetch(config.TINYURL + "profile/" + this.state.user, obj)
       .then((response) => response.json())
       .then((data) => {
         console.log(data);
@@ -130,7 +130,7 @@ class Profile extends Component {
       }),
     };
 
-    fetch(config.TINYURL + 'addProfile/' + this.state.user, obj)
+    fetch(config.TINYURL + 'profile/' + this.state.user, obj)
       .then((response) => response.json())
       .then((data) => {
         this.nextPath("/tinyurl");
